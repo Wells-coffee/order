@@ -2,7 +2,7 @@
   <div class="content">
     <Form :model="order" :label-width="80" class="my-form">
         <Form-item label="姓名" prop="name">
-            <Input v-model="order.name" placeholder="请输入姓名"></Input>
+            <Input v-model="order.username" placeholder="请输入姓名"></Input>
         </Form-item>
         <Form-item label="成交价" prop="name">
             <Input v-model="order.price" placeholder="请输入价格"></Input>
@@ -39,15 +39,25 @@
 </template>
 
 <script>
+import Util from '../libs/util';
 export default {
   data () {
-    return {
-      order: {
-        name: '',
-
-      }
+        return {
+          order: {
+            username: '',
+            profit: 0
+          }
+        }
+    },
+    methods: {
+        handleSubmit () {
+            console.log('sumbit');
+            this.order.profit = this.order.price - this.order.express_price;
+            Util.ajax.post('order', this.order).then((resp) => {
+                console.log(resp);
+            })
+        }
     }
-  }
 }
 </script>
 
