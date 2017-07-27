@@ -19,7 +19,7 @@
             <Menu-item name="3">
                 <Icon type="document-text"></Icon>
 
-                <router-link to="/add">设备管理</router-link>
+                <router-link to="/device">设备管理</router-link>
 
             </Menu-item>
         </Menu>

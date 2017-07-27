@@ -40,6 +40,24 @@ export default {
             },{
                 title: '备注',
                 key: 'remark'
+            },{
+                title: '操作',
+                key: 'action',
+                render: (h, params) => {
+                    return h('div', [
+                        h('Button', {
+                            props: {
+                                type: 'text',
+                                size: 'small'
+                            },
+                            on: {
+                                click: () =>{
+                                    this.getExpressInfo(params.row.express_type, params.row.express_id);
+                                }
+                            }
+                        }, '查询')
+                    ])
+                }
             }
         ],
         mydata: []
@@ -54,6 +72,10 @@ export default {
                 console.log(resp);
                 this.mydata = resp.data;
             })
+        },
+        getExpressInfo (exp_name, exp_id) {
+            let url = 'https://www.baidu.com/s?wd=' + exp_name + ' ' + exp_id;
+            window.open(url);
         }
     }
 }

@@ -11,19 +11,20 @@
             <Input v-model="order.mobile" placeholder="请输入手机号"></Input>
         </Form-item>
         <Form-item label="地区" prop="name">
-            <Input v-model="order.location" placeholder="请输入地区"></Input>
+            <!-- <Input v-model="order.location" placeholder="请输入地区"></Input> -->
+            <Cascader :data="cityArr" v-model="order.location"></Cascader>
         </Form-item>
         <Form-item label="快递" prop="name">
-            <Input v-model="order.express_type" placeholder="请输入地区"></Input>
+            <!-- <Input v-model="order.express_type" placeholder="请输入地区"></Input> -->
+            <Select v-model="order.express_type">
+                <Option v-for="item in express" :value="item.value" :key="item.value">{{item.label}}</Option>
+            </Select>
         </Form-item>
         <Form-item label="快递单号" prop="name">
             <Input v-model="order.express_id" placeholder="请输入快递单号"></Input>
         </Form-item>
         <Form-item label="快递费" prop="name">
             <Input v-model="order.express_price" placeholder="请输入快递费"></Input>
-        </Form-item>
-        <Form-item label="价格调整" prop="name">
-            <Input v-model="order.price_adjust" placeholder="价格调整"></Input>
         </Form-item>
         <Form-item label="备注" prop="name">
             <Input v-model="order.remark" placeholder="备注"></Input>
@@ -40,13 +41,18 @@
 
 <script>
 import Util from '../libs/util';
+import City from '../libs/city';
+import Express from '../libs/express';
+
 export default {
   data () {
         return {
           order: {
-            username: '',
-            profit: 0
-          }
+                username: '',
+                profit: 0
+            },
+            cityArr: City,
+            express: Express
         }
     },
     methods: {
