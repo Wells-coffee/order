@@ -7,6 +7,11 @@
         <Form-item label="成交价" prop="name">
             <Input v-model="order.price" placeholder="请输入价格"></Input>
         </Form-item>
+        <Form-item label="成本" prop="name">
+            <Select v-model="device_id" @on-change="typeChange()">
+                <Option v-for="item in device_types" :value="item.id" :key="item.id">{{item.cost}}</Option>
+            </Select>
+        </Form-item>
         <Form-item label="手机号" prop="name">
             <Input v-model="order.mobile" placeholder="请输入手机号"></Input>
         </Form-item>
@@ -30,7 +35,7 @@
             <Input v-model="order.remark" placeholder="备注"></Input>
         </Form-item>
         <Form-item>
-            <Button type="primary" @click="handleSubmit('formCustom')">提交</Button>
+            <Button type="primary" @click="handleSubmit()">提交</Button>
             <Button type="ghost" @click="handleReset('formCustom')" style="margin-left: 8px">重置</Button>
 
         </Form-item>
@@ -52,15 +57,46 @@ export default {
                 profit: 0
             },
             cityArr: City,
-            express: Express
+            express: Express,
+            device_cost: 0,
+            device_id: '',
+            device_remain: 0,
+            device_types: []
         }
     },
+    created () {
+        this.init();
+    },
     methods: {
+        init () {
+            Util.ajax.get('device', {}).then((resp) => {
+                this.device_types = resp.data;
+            })
+        },
         handleSubmit () {
-            console.log('sumbit');
-            this.order.profit = this.order.price - this.order.express_price;
+            this.order.profit = this.order.price - this.order.express_price - this.device_cost;
             Util.ajax.post('order', this.order).then((resp) => {
                 console.log(resp);
+                this.countMinus();
+                this.$router.push({path: '/'});
+            })
+        },
+        typeChange () {
+            console.log('change');
+            Util.ajax.get('device/' + this.device_id, {}).then((resp) => {
+                console.log(resp.data);
+                this.device_cost = resp.data.cost;
+                this.device_remain = resp.data.remain;
+
+            })
+        },
+        countMinus () {
+            let remain = this.device_remain - 1;
+            Util.ajax.post('device/' + this.device_id, {
+                remain: remain,
+                _method: 'PUT'
+            }).then((resp) => {
+                console.log(resp.data);
             })
         }
     }
