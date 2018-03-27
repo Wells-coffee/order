@@ -15,6 +15,8 @@ Vue.use(iView);
 
 // test git dev commit
 
+// d commit
+
 // 路由配置
 const RouterConfig = {
     mode: 'history',
