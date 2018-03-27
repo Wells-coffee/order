@@ -14,7 +14,7 @@ util.title = function(title) {
 const ajaxUrl = env === 'development' ?
     'https://d.apicloud.com/mcm/api/' :
     env === 'production' ?
-    'https://www.url.com' :
+    'https://d.apicloud.com/mcm/api/' :
     'https://debug.url.com';
 
 let apiObj = {

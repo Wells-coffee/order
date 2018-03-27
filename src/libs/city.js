@@ -32,6 +32,16 @@ let City = [
                 label: '绥化'
             }
         ]
+    },
+    {
+        value: '江西',
+        label: '江西',
+        children: [
+            {
+                value: '朔门',
+                label: '朔门'
+            }
+        ]
     }
 
 ];
