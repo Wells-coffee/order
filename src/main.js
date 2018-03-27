@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 
 Vue.use(iView);
 
-
+// test git dev commit
 
 // 路由配置
 const RouterConfig = {
