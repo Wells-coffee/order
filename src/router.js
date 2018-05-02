@@ -5,7 +5,7 @@ const routers = [{
     },
     component: (resolve) => require(['./views/index.vue'], resolve)
 },{
-    path: '/add',
+    path: '/adddevice',
     meta: {
         title: '添加'
     },
