@@ -11,7 +11,7 @@ const routers = [{
     },
     component: (resolve) => require(['./views/add.vue'], resolve)
 },{
-    path: '/device',
+    path: '/devicelist',
     meta: {
         title: '设备'
     },
